@@ -1,13 +1,12 @@
-import React from 'react';
-import NavigationBar from './NavigationBar';
-import './App.css';
+import React from 'react'
+import NavigationBar from '../components/Navbar'
 
-function App() {
+function Prediction() {
   return (
-    <div className="app">
+    <div className='app'>
       <NavigationBar />
     </div>
-  );
+  )
 }
 
-export default App;
+export default Prediction
