@@ -1,0 +1,13 @@
+Firebase project keys
+Project name
+IHD Prediction System
+
+Project ID 
+ihd-prediction-system
+
+Project number 
+502357356443
+
+Web API Key
+AIzaSyCzLAMu5dQRc0_kp6uLVLNR6NlNZebIOLI
+
