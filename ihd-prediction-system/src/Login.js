@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from './context/AuthContext'
 import toast from 'react-hot-toast'
+import logo from './assets/logo.svg'
 
 const Login = ({ switchToSignUp }) => {
   const [passwordShown, setPasswordShown] = useState(false)
@@ -49,63 +49,28 @@ const Login = ({ switchToSignUp }) => {
 
   console.log(email, password)
   return (
-    <div className='login-container'>
-      <div className='login-box'>
-        <div className='logo'>
-          <img
-            src='logo.png'
-            alt='Insert IHD Prediction System Logo Here'
-          />
-        </div>
-        <h2 className='welcome-text'>Welcome Back!</h2>
-        <span>{loginError}</span>
-        <form onSubmit={handleSubmit}>
-          <label
-            className='input-label'
-            htmlFor='username'
-          >
-            Email:
-          </label>
-          <div className='input-group'>
+    <div className='bg-cover bg-center h-screen flex items-center justify-center bg-login'>
+      <div className='bg-white px-32 py-5 rounded-2xl flex flex-col justify-center items-center'>
+        <img
+          src={logo}
+          alt='logo'
+          className='w-36 h-36'
+        />
+        <h1 className='text-4xl'>Welcome Back !</h1>
+        <div className='mt-5'>
+          <form className='flex flex-col'>
+            <label
+              htmlFor='username'
+              className='text-primary font-semibold'
+            >
+              Username:
+            </label>
             <input
-              id='username'
               type='text'
-              placeholder={usernameFocus ? '' : 'Enter your email'}
-              onChange={(e) => handleOnChangeEmail(e.target.value)}
-              required
-              onFocus={() => setUsernameFocus(true)}
-              onBlur={() => setUsernameFocus(false)}
+              className='p-2 border-[#353535] border-b-2'
             />
-            <i className='fas fa-user icon-user'></i>
-          </div>
-          <label
-            className='input-label'
-            htmlFor='password'
-          >
-            Password:
-          </label>
-          <div className='input-group'>
-            <input
-              id='password'
-              type={passwordShown ? 'text' : 'password'}
-              placeholder={passwordFocus ? '' : 'Enter your password'}
-              required
-              onChange={(e) => handleOnChangePassword(e.target.value)}
-              onFocus={() => setPasswordFocus(true)}
-              onBlur={() => setPasswordFocus(false)}
-            />
-            <i
-              onClick={togglePasswordVisibility}
-              className={`fas ${
-                passwordShown ? 'fa-eye-slash' : 'fa-eye'
-              } icon-password`}
-            ></i>
-          </div>
-          <button type='submit'>Login</button>
-        </form>
-        <p className='text-center'>
-          Don't have an account? <Link to='/signup'>Sign up</Link>
-        </p>
+          </form>
+        </div>
       </div>
     </div>
   )

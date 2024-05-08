@@ -42,9 +42,14 @@ const SignUp = () => {
         return toast.error('Password does not match')
       }
 
+      toast.loading('loading..', { id: 'signup_loading' })
+
       await createUser(credentials.email, credentials.password)
+
+      toast.dismiss('signup_loading')
       navigate('/prediction')
     } catch (e) {
+      toast.dismiss('signup_loading')
       console.log(e.message)
     }
   }

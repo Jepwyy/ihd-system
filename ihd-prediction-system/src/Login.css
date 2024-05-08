@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@300;700&display=swap'); /* for fonts */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'); /* for icons */
 
-.login-container {
+.bg-login {
+  background-image: url('./assets/login-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to bottom, #70D1DA 25%, #25B1BD 62%, #00A5B3 100%);
+  background: linear-gradient(
+    to bottom,
+    #70d1da 25%,
+    #25b1bd 62%,
+    #00a5b3 100%
+  );
 }
 
 .login-box {
@@ -15,7 +25,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
-  width: 400px; 
+  width: 400px;
   max-width: 100%;
   min-width: 300px;
 }
@@ -33,7 +43,7 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: bold;
-  color: #2DA9B5;
+  color: #2da9b5;
   text-align: left;
   display: block;
 }
@@ -57,7 +67,7 @@
 
 .input-group input:focus {
   outline: none;
-  border-bottom: 2px solid #2DA9B5;
+  border-bottom: 2px solid #2da9b5;
 }
 
 .input-group i {
@@ -72,7 +82,7 @@
 button {
   width: 100%;
   padding: 12px;
-  background-color: #2DA9B5;
+  background-color: #2da9b5;
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
@@ -95,9 +105,9 @@ button:hover {
 
 .text-center a {
   font-weight: bold;
-  color: #23929D;
+  color: #23929d;
 }
 
 .text-center span {
   font-weight: 300;
-}
+} */
