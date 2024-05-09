@@ -134,13 +134,13 @@ const PredictionForm = () => {
         </span>
         <div className='px-[4rem]'>
           <div className=' relative border-2 border-white text-center py-2 rounded-md text-white bg-[#B7F9FF] font-semibold text-2xl'>
-            <span className=' text-white bg-[#B7F9FF] font-bold text-2xl'>
-              10%
-            </span>
-
+            &nbsp;
+            <div className=' absolute text-white w-full top-2 font-bold text-2xl z-10'>
+              90%
+            </div>
             <div
-              style={{ width: '10%' }}
-              className='bg-[#003034] absolute top-0 bottom-0 rounded-md '
+              style={{ width: '90%' }}
+              className='bg-[#003034]/80 absolute top-0 bottom-0 rounded-md '
             >
               &nbsp;
             </div>
