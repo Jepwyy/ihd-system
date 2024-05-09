@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ModalSave from '../Modal/ModalSave'
+import ModalNew from '../Modal/ModalNew'
 
 const PredictionForm = () => {
+  const [modalNew, setModalNew] = useState(false)
+  const [modalSave, setModalSave] = useState(false)
   return (
     <div className='flex justify-center flex-col gap-4 mt-6 pt-4 pb-8 px-[10rem]'>
       <div className='flex justify-center'>
@@ -144,13 +148,22 @@ const PredictionForm = () => {
         </div>
       </div>
       <div className=' flex justify-end gap-3'>
-        <button className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'>
+        <button
+          onClick={() => setModalSave(true)}
+          className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
+        >
           Save
         </button>
-        <button className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'>
+        <button
+          onClick={() => setModalNew(true)}
+          className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
+        >
           Enter New Data
         </button>
       </div>
+
+      {modalSave && <ModalSave setModalSave={setModalSave} />}
+      {modalNew && <ModalNew setModalNew={setModalNew} />}
     </div>
   )
 }

@@ -59,7 +59,8 @@ const Login = ({ switchToSignUp }) => {
       <div className='bg-white px-[9.5rem] py-[2rem] rounded-2xl flex flex-col justify-center items-center'>
         <img src={logo} alt='logo' className='w-32 h-32 mb-2' />
         <h1 className='text-4xl font-[400] text-[#353535]'>Welcome Back !</h1>
-        <form className='flex flex-col gap-4 mt-10 w-full '>
+
+        <form className='flex flex-col gap-4 mt-10 w-[18rem]'>
           <div className='flex flex-col relative'>
             <label htmlFor='username' className='text-primary font-semibold'>
               Username:
