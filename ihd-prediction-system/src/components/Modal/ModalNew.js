@@ -1,7 +1,7 @@
 import React, { ReactNode, useRef, useEffect } from 'react'
 import { IoMdClose } from 'react-icons/io'
 
-const ModalNew = ({ setModalNew }) => {
+const ModalNew = ({ setModalNew, handleResetForm }) => {
   const modalRef = useRef(null)
 
   useEffect(() => {
@@ -20,7 +20,10 @@ const ModalNew = ({ setModalNew }) => {
 
   return (
     <div className='fixed z-[100] inset-0 bg-white bg-opacity-50 backdrop-blur-sm flex items-center justify-center py-2 overflow-y-auto'>
-      <div className='mx-auto rounded-xl' ref={modalRef}>
+      <div
+        className='mx-auto rounded-xl'
+        ref={modalRef}
+      >
         <div className='absolute top-2 right-2'>
           <IoMdClose
             size={40}
@@ -46,7 +49,13 @@ const ModalNew = ({ setModalNew }) => {
               >
                 Cancel
               </button>
-              <button className=' text-white bg-[#00717A] py-1 px-5 rounded-md'>
+              <button
+                className=' text-white bg-[#00717A] py-1 px-5 rounded-md'
+                onClick={() => {
+                  handleResetForm()
+                  setModalNew(false)
+                }}
+              >
                 Save
               </button>
             </div>

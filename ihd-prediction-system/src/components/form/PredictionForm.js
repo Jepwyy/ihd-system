@@ -1,10 +1,77 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import ModalSave from '../Modal/ModalSave'
 import ModalNew from '../Modal/ModalNew'
+import { db } from '../../firebase'
+import { collection, addDoc, Timestamp } from 'firebase/firestore'
+import toast from 'react-hot-toast'
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 100) + 1
+}
+
+function hasAllValues(obj) {
+  const values = Object.values(obj)
+
+  return values.every((value) => value !== '' && !!value)
+}
 
 const PredictionForm = () => {
+  const defaultDetails = {
+    lastname: '',
+    firstname: '',
+    age: '',
+    sex: 'Male',
+    bmi: '',
+    blood_pressure: '',
+    cholesterol_level: '',
+    history_of_stroke: 'Yes',
+    alcohol_consumption_status: 'Drinker',
+    smoker: 'Yes',
+    engage_physical_activities: 'Yes',
+  }
+
   const [modalNew, setModalNew] = useState(false)
   const [modalSave, setModalSave] = useState(false)
+
+  const [results, setResults] = useState(0)
+  const [details, setDetails] = useState(defaultDetails)
+
+  const formRef = useRef(null)
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target
+    setDetails((prev) => {
+      return { ...prev, [name]: value }
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(details)
+    setResults(getRandomNumber())
+  }
+
+  const handleSaveData = async () => {
+    try {
+      toast.loading('loading...', { id: 'loadingResults' })
+      await addDoc(collection(db, 'patients'), {
+        ...details,
+        timestamp: Timestamp.now(),
+      })
+      toast.dismiss('loadingResults')
+      toast.success('Saved Successfully')
+      handleResetForm()
+    } catch (err) {
+      toast.error(err)
+      toast.dismiss('loadingResults')
+    }
+  }
+
+  const handleResetForm = () => {
+    formRef.current.reset()
+    setDetails(defaultDetails)
+  }
+
   return (
     <div className='flex justify-center flex-col gap-4 mt-6 pt-4 pb-8 px-[10rem]'>
       <div className='flex justify-center'>
@@ -22,31 +89,58 @@ const PredictionForm = () => {
           Enter Attributes for Prediction
         </span>
         <hr className=' bg-white h-[.10rem] my-2' />
-        <form className='mt-6 px-8 grid grid-cols-12 gap-3'>
+        <form
+          ref={formRef}
+          className='mt-6 px-8 grid grid-cols-12 gap-3'
+          onSubmit={handleSubmit}
+        >
           <div className=' col-span-6 flex flex-col'>
             <label className=' text-white font-semibold text-xl ms-3'>
               Last Name:
             </label>
-            <input type='text' className='bg-white h-10 rounded-md' />
+            <input
+              type='text'
+              className='bg-white h-10 rounded-md'
+              name='lastname'
+              onChange={handleFormChange}
+              required
+            />
           </div>
           <div className=' col-span-6 flex flex-col'>
             <label className=' text-white font-semibold text-xl ms-3'>
               First Name:
             </label>
-            <input type='text' className='bg-white h-10 rounded-md' />
+            <input
+              type='text'
+              className='bg-white h-10 rounded-md'
+              name='firstname'
+              onChange={handleFormChange}
+              required
+            />
           </div>
           <div className=' col-span-1 flex flex-col'>
             <label className=' text-white font-semibold text-xl ms-3'>
               Age:
             </label>
-            <input type='number' className='bg-white h-10 rounded-md' />
+            <input
+              type='number'
+              className='bg-white h-10 rounded-md'
+              name='age'
+              onChange={handleFormChange}
+              required
+            />
           </div>
           <div className=' col-span-2 flex flex-col'>
             <label className=' text-white font-semibold text-xl ms-3'>
               Sex:
             </label>
 
-            <select className='bg-white h-10 rounded-md'>
+            <select
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              required
+              name='sex'
+            >
               <option value='Male'>Male</option>
               <option value='Female'>Female</option>
             </select>
@@ -55,14 +149,26 @@ const PredictionForm = () => {
             <label className=' text-white font-semibold text-xl ms-3'>
               BMI:
             </label>
-            <input type='number' className='bg-white h-10 rounded-md' />
+            <input
+              type='number'
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              name='bmi'
+              required
+            />
           </div>
           <div className=' col-span-8 flex flex-col'>
             <label className=' text-white font-semibold text-xl ms-3'>
               Patient’s Blood Pressure:
             </label>
             <div className='flex w-full gap-2'>
-              <input type='text' className='bg-white h-10 rounded-md w-full' />
+              <input
+                type='text'
+                className='bg-white h-10 rounded-md w-full'
+                onChange={handleFormChange}
+                name='blood_pressure'
+                required
+              />
               <div className='bg-[#15545A] text-white px-6 flex items-end pb-2  text-xs rounded-md'>
                 <span>mmHg</span>
               </div>
@@ -73,7 +179,13 @@ const PredictionForm = () => {
               Patient’s Cholesterol Level:
             </label>
             <div className='flex w-full gap-2'>
-              <input type='text' className='bg-white h-10 rounded-md w-full' />
+              <input
+                type='text'
+                className='bg-white h-10 rounded-md w-full'
+                onChange={handleFormChange}
+                name='cholesterol_level'
+                required
+              />
               <div className='bg-[#15545A] text-white px-6 flex items-end pb-2  text-xs rounded-md'>
                 <span>mg/dL</span>
               </div>
@@ -84,7 +196,12 @@ const PredictionForm = () => {
               Have history of stroke?
             </label>
 
-            <select className='bg-white h-10 rounded-md'>
+            <select
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              name='history_of_stroke'
+              required
+            >
               <option value='Yes'>Yes</option>
               <option value='No'>No</option>
             </select>
@@ -94,7 +211,12 @@ const PredictionForm = () => {
               Alcohol consumption status:
             </label>
 
-            <select className='bg-white h-10 rounded-md'>
+            <select
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              name='alcohol_consumption_status'
+              required
+            >
               <option value='Drinker'>Drinker</option>
               <option value='Non-Drinker'>Non-Drinker</option>
             </select>
@@ -104,7 +226,12 @@ const PredictionForm = () => {
               Smoker?
             </label>
 
-            <select className='bg-white h-10 rounded-md'>
+            <select
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              name='smoker'
+              required
+            >
               <option value='Yes'>Yes</option>
               <option value='No'>No</option>
             </select>
@@ -114,13 +241,21 @@ const PredictionForm = () => {
               Engage Physical Activities?
             </label>
 
-            <select className='bg-white h-10 rounded-md'>
+            <select
+              className='bg-white h-10 rounded-md'
+              onChange={handleFormChange}
+              name='engage_physical_activities'
+              required
+            >
               <option value='Yes'>Yes</option>
               <option value='No'>No</option>
             </select>
           </div>
           <div className=' col-span-12 flex justify-center mt-10'>
-            <button className='w-auto border-4 border-white text-white hover:bg-[#239a98] text-xl py-2 bg-[#042B2F] rounded-full font-semibold px-8'>
+            <button
+              type='submit'
+              className='w-auto border-4 border-white text-white hover:bg-[#239a98] text-xl py-2 bg-[#042B2F] rounded-full font-semibold px-8'
+            >
               Run Results
             </button>
           </div>
@@ -136,10 +271,10 @@ const PredictionForm = () => {
           <div className=' relative border-2 border-white text-center py-2 rounded-md text-white bg-[#B7F9FF] font-semibold text-2xl'>
             &nbsp;
             <div className=' absolute text-white w-full top-2 font-bold text-2xl z-10'>
-              90%
+              {results}%
             </div>
             <div
-              style={{ width: '90%' }}
+              style={{ width: `${results}%` }}
               className='bg-[#003034]/80 absolute top-0 bottom-0 rounded-md '
             >
               &nbsp;
@@ -149,21 +284,38 @@ const PredictionForm = () => {
       </div>
       <div className=' flex justify-end gap-3'>
         <button
-          onClick={() => setModalSave(true)}
+          onClick={() => {
+            if (!hasAllValues(details)) {
+              return toast.error('Incomplete Details')
+            }
+            setModalSave(true)
+          }}
+          type='button'
           className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
         >
           Save
         </button>
         <button
           onClick={() => setModalNew(true)}
+          type='button'
           className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
         >
           Enter New Data
         </button>
       </div>
 
-      {modalSave && <ModalSave setModalSave={setModalSave} />}
-      {modalNew && <ModalNew setModalNew={setModalNew} />}
+      {modalSave && (
+        <ModalSave
+          setModalSave={setModalSave}
+          handleSaveData={handleSaveData}
+        />
+      )}
+      {modalNew && (
+        <ModalNew
+          setModalNew={setModalNew}
+          handleResetForm={handleResetForm}
+        />
+      )}
     </div>
   )
 }

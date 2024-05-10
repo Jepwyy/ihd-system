@@ -50,7 +50,7 @@ const SignUp = () => {
       await createUser(credentials.email, credentials.password)
 
       toast.dismiss('signup_loading')
-      navigate('/prediction')
+      navigate('/prediction-form')
     } catch (e) {
       toast.dismiss('signup_loading')
       console.log(e.message)
@@ -64,7 +64,11 @@ const SignUp = () => {
   return (
     <div className='bg-cover bg-center h-screen flex items-center justify-center bg-login'>
       <div className='bg-white px-[9.5rem] py-[2rem] rounded-2xl flex flex-col justify-center items-center'>
-        <img src={logos} alt='logo' className='w-28 h-28 mb-2' />
+        <img
+          src={logos}
+          alt='logo'
+          className='w-28 h-28 mb-2'
+        />
         <h1 className='text-4xl font-[400] text-[#353535]'>Sign Up </h1>
         <h1 className='text-xl mt-2 font-[300] text-[#353535]'>
           Create your account
@@ -74,7 +78,10 @@ const SignUp = () => {
           className='flex flex-col gap-4 mt-10 w-[18rem] '
         >
           <div className='flex flex-col relative'>
-            <label htmlFor='username' className='text-primary font-semibold'>
+            <label
+              htmlFor='username'
+              className='text-primary font-semibold'
+            >
               Username:
             </label>
             <input
@@ -91,7 +98,10 @@ const SignUp = () => {
             />
           </div>
           <div className='flex flex-col relative'>
-            <label htmlFor='username' className='text-primary font-semibold'>
+            <label
+              htmlFor='username'
+              className='text-primary font-semibold'
+            >
               Password:
             </label>
             <input
@@ -118,7 +128,10 @@ const SignUp = () => {
             )}
           </div>
           <div className='flex flex-col relative'>
-            <label htmlFor='username' className='text-primary font-semibold'>
+            <label
+              htmlFor='username'
+              className='text-primary font-semibold'
+            >
               Confirm Password:
             </label>
             <input

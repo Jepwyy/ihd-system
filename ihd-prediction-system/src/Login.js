@@ -45,7 +45,7 @@ const Login = ({ switchToSignUp }) => {
       toast.dismiss('login_loading')
 
       // navigate
-      navigate('/prediction')
+      navigate('/prediction-form')
     } catch (e) {
       toast.error(e.message)
       toast.dismiss('login_loading')
@@ -57,17 +57,28 @@ const Login = ({ switchToSignUp }) => {
   return (
     <div className='bg-cover bg-center h-screen flex items-center justify-center bg-login'>
       <div className='bg-white px-[9.5rem] py-[2rem] rounded-2xl flex flex-col justify-center items-center'>
-        <img src={logo} alt='logo' className='w-32 h-32 mb-2' />
+        <img
+          src={logo}
+          alt='logo'
+          className='w-32 h-32 mb-2'
+        />
         <h1 className='text-4xl font-[400] text-[#353535]'>Welcome Back !</h1>
 
-        <form className='flex flex-col gap-4 mt-10 w-[18rem]'>
+        <form
+          className='flex flex-col gap-4 mt-10 w-[18rem]'
+          onSubmit={handleSubmit}
+        >
           <div className='flex flex-col relative'>
-            <label htmlFor='username' className='text-primary font-semibold'>
-              Username:
+            <label
+              htmlFor='email'
+              className='text-primary font-semibold'
+            >
+              Email:
             </label>
             <input
               type='text'
               className=' active: border-[#353535] border-b-[3px] focus-visible:outline-0'
+              onChange={(e) => handleOnChangeEmail(e.target.value)}
             />
             <FaUser
               size={20}
@@ -76,12 +87,16 @@ const Login = ({ switchToSignUp }) => {
             />
           </div>
           <div className='flex flex-col relative'>
-            <label htmlFor='username' className='text-primary font-semibold'>
+            <label
+              htmlFor='username'
+              className='text-primary font-semibold'
+            >
               Password:
             </label>
             <input
               type={!passwordShown ? 'password' : 'text'}
               className=' active: border-[#353535] border-b-[3px]  focus-visible:outline-0'
+              onChange={(e) => handleOnChangePassword(e.target.value)}
             />
             {!passwordShown ? (
               <IoEyeOff

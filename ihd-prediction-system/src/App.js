@@ -14,11 +14,29 @@ function App() {
     <Router>
       <AuthContextProvider>
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route element={<Prediction />}>
-            <Route path='/prediction-form' element={<PredictionForm />} />
-            <Route path='/prediction-table' element={<PredictionTable />} />
+          <Route
+            path='/'
+            element={<Login />}
+          />
+          <Route
+            path='/signup'
+            element={<SignUp />}
+          />
+          <Route
+            element={
+              <ProtectedRoute>
+                <Prediction />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              path='/prediction-form'
+              element={<PredictionForm />}
+            />
+            <Route
+              path='/prediction-table'
+              element={<PredictionTable />}
+            />
           </Route>
         </Routes>
       </AuthContextProvider>
