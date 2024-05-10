@@ -64,11 +64,7 @@ const SignUp = () => {
   return (
     <div className='bg-cover bg-center h-screen flex items-center justify-center bg-login'>
       <div className='bg-white px-[9.5rem] py-[2rem] rounded-2xl flex flex-col justify-center items-center'>
-        <img
-          src={logos}
-          alt='logo'
-          className='w-28 h-28 mb-2'
-        />
+        <img src={logos} alt='logo' className='w-28 h-28 mb-2' />
         <h1 className='text-4xl font-[400] text-[#353535]'>Sign Up </h1>
         <h1 className='text-xl mt-2 font-[300] text-[#353535]'>
           Create your account
@@ -78,14 +74,12 @@ const SignUp = () => {
           className='flex flex-col gap-4 mt-10 w-[18rem] '
         >
           <div className='flex flex-col relative'>
-            <label
-              htmlFor='username'
-              className='text-primary font-semibold'
-            >
-              Username:
+            <label htmlFor='username' className='text-primary font-semibold'>
+              Email:
             </label>
             <input
               type='text'
+              name='email'
               onChange={handleFormChange}
               onFocus={() => setUsernameFocus(true)}
               onBlur={() => setUsernameFocus(false)}
@@ -98,10 +92,7 @@ const SignUp = () => {
             />
           </div>
           <div className='flex flex-col relative'>
-            <label
-              htmlFor='username'
-              className='text-primary font-semibold'
-            >
+            <label htmlFor='username' className='text-primary font-semibold'>
               Password:
             </label>
             <input
@@ -109,6 +100,7 @@ const SignUp = () => {
               onChange={handleFormChange}
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
+              name='password'
               className=' active: border-[#353535] border-b-[3px]  focus-visible:outline-0'
             />
             {!passwordShown ? (
@@ -128,15 +120,13 @@ const SignUp = () => {
             )}
           </div>
           <div className='flex flex-col relative'>
-            <label
-              htmlFor='username'
-              className='text-primary font-semibold'
-            >
+            <label htmlFor='username' className='text-primary font-semibold'>
               Confirm Password:
             </label>
             <input
               type={!confirmPasswordShown ? 'password' : 'text'}
               onChange={handleFormChange}
+              name='confirmPassword'
               onFocus={() => setConfirmPasswordFocus(true)}
               onBlur={() => setConfirmPasswordFocus(false)}
               className=' active: border-[#353535] border-b-[3px]  focus-visible:outline-0'

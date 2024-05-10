@@ -265,7 +265,8 @@ const PredictionForm = () => {
         <span className='text-white font-bold text-2xl'>Results</span>
         <hr className=' bg-white h-[.10rem] my-4' />
         <span className='text-white font-[400] text-xl'>
-          The patient has a risk percentage of 10% of Ischemic Heart Disease{' '}
+          The patient has a risk percentage of {results}% of Ischemic Heart
+          Disease{' '}
         </span>
         <div className='px-[4rem]'>
           <div className=' relative border-2 border-white text-center py-2 rounded-md text-white bg-[#B7F9FF] font-semibold text-2xl'>
@@ -311,10 +312,7 @@ const PredictionForm = () => {
         />
       )}
       {modalNew && (
-        <ModalNew
-          setModalNew={setModalNew}
-          handleResetForm={handleResetForm}
-        />
+        <ModalNew setModalNew={setModalNew} handleResetForm={handleResetForm} />
       )}
     </div>
   )
