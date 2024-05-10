@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import NavigationBar from '../components/Navbar'
-import PredictionForm from '../components/form/PredictionForm'
-import PredictionTable from '../components/table/PredictionTable'
+import { Outlet } from 'react-router-dom'
 
 function Prediction() {
-  const [tab, setTab] = useState('prediction')
   return (
     <div className='app flex flex-col'>
-      <NavigationBar setTab={setTab} tab={tab} />
-      {tab === 'prediction' ? (
-        <PredictionForm />
-      ) : tab === 'history' ? (
-        <PredictionTable />
-      ) : null}
+      <NavigationBar />
+      <Outlet />
     </div>
   )
 }

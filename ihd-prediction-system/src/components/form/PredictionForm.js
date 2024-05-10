@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ModalSave from '../Modal/ModalSave'
+import ModalNew from '../Modal/ModalNew'
 
 const PredictionForm = () => {
+  const [modalNew, setModalNew] = useState(false)
+  const [modalSave, setModalSave] = useState(false)
   return (
     <div className='flex justify-center flex-col gap-4 mt-6 pt-4 pb-8 px-[10rem]'>
       <div className='flex justify-center'>
@@ -130,13 +134,13 @@ const PredictionForm = () => {
         </span>
         <div className='px-[4rem]'>
           <div className=' relative border-2 border-white text-center py-2 rounded-md text-white bg-[#B7F9FF] font-semibold text-2xl'>
-            <span className=' text-white bg-[#B7F9FF] font-bold text-2xl'>
-              10%
-            </span>
-
+            &nbsp;
+            <div className=' absolute text-white w-full top-2 font-bold text-2xl z-10'>
+              90%
+            </div>
             <div
-              style={{ width: '10%' }}
-              className='bg-[#003034] absolute top-0 bottom-0 rounded-md '
+              style={{ width: '90%' }}
+              className='bg-[#003034]/80 absolute top-0 bottom-0 rounded-md '
             >
               &nbsp;
             </div>
@@ -144,13 +148,22 @@ const PredictionForm = () => {
         </div>
       </div>
       <div className=' flex justify-end gap-3'>
-        <button className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'>
+        <button
+          onClick={() => setModalSave(true)}
+          className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
+        >
           Save
         </button>
-        <button className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'>
+        <button
+          onClick={() => setModalNew(true)}
+          className=' bg-[#00717A] rounded-md text-white font-semibold px-6 py-2 text-xl hover:bg-[#239a98]'
+        >
           Enter New Data
         </button>
       </div>
+
+      {modalSave && <ModalSave setModalSave={setModalSave} />}
+      {modalNew && <ModalNew setModalNew={setModalNew} />}
     </div>
   )
 }

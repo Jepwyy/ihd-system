@@ -1,13 +1,12 @@
 import React from 'react'
 import './index.css'
 import { UserAuth } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { MdLogout } from 'react-icons/md'
 import { FaUser } from 'react-icons/fa6'
-const NavigationBar = ({ tab, setTab }) => {
+const NavigationBar = () => {
   const { user, logout } = UserAuth()
   const navigate = useNavigate()
-  console.log(user)
 
   const onLogout = () => {
     logout()
@@ -16,26 +15,26 @@ const NavigationBar = ({ tab, setTab }) => {
   return (
     <nav className=' bg-[#00717A] flex justify-between py-4 px-6'>
       <div className='flex items-center gap-2'>
-        <button
-          onClick={() => setTab('history')}
-          className={`${
-            tab === 'history'
-              ? 'text-[#00717A] bg-white rounded-md font-medium'
-              : 'text-white'
-          } text-lg  p-2`}
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? 'text-[#00717A] bg-white rounded-md font-medium text-lg  p-2'
+              : 'text-white text-lg  p-2'
+          }
+          to={'/prediction-table'}
         >
           Results History
-        </button>
-        <button
-          onClick={() => setTab('prediction')}
-          className={`${
-            tab === 'prediction'
-              ? 'text-[#00717A] bg-white rounded-md font-medium'
-              : 'text-white'
-          } text-lg  p-2`}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? 'text-[#00717A] bg-white rounded-md font-medium text-lg  p-2'
+              : 'text-white text-lg  p-2'
+          }
+          to={'/prediction-form'}
         >
           Prediction
-        </button>
+        </NavLink>
       </div>
       <div className=' flex items-center gap-4'>
         <div className='text-white flex  items-center gap-2 text-lg'>
